@@ -4,6 +4,7 @@
 #		- when TravisCI generates this example with cookiecutter, the file owner stays root
 #				and running `cp -f $(ENVFILE) .env` will result a permission denied error
 DOCKER_RUN_ALPINE = docker run -v $(PWD):/opt/app -w /opt/app alpine
+
 APP_NAME={{ cookiecutter.git_repo_name }}
 VERSION = 0.0.1
 IMAGE_NAME ?= {{ cookiecutter.git_username }}/$(APP_NAME):$(VERSION)
