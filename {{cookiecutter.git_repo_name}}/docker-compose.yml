@@ -1,0 +1,13 @@
+version: '3.4'
+services:
+  golang:
+    image: flemay/golang:1-stretch
+    volumes:
+      - .:/go/src/{{cookiecutter.app_go_package_path}}
+    working_dir: /go/src/{{cookiecutter.app_go_package_path}}
+
+  musketeers:
+    image: flemay/musketeers
+    volumes:
+      - .:/opt/app
+    working_dir: /opt/app
