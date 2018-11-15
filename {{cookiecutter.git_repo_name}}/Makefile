@@ -42,11 +42,11 @@ removeEnvfile:
 ###################
 
 # if there is no vendor directory then unzip from golang_vendor.zip artifact
-$(GOLANG_DEPS_DIR): | $(GOLANG_DEPS_ARTIFACT)
+$(GOLANG_DEPS_DIR):
 	$(COMPOSE_RUN_MUSKETEERS) make _unzipGoDeps
 
 # if bin directory is not present, it unzips all the zip binaries into bin directory
-$(BIN_DIR): | $(BIN_ARTIFACT)
+$(BIN_DIR):
 	$(COMPOSE_RUN_MUSKETEERS) make _unzipBinArtifact
 
 # _zipGoDeps zips the go dependencies so they can be passed along with a single zip file
@@ -55,7 +55,7 @@ _zipGoDeps:
 .PHONY: _zipGoDeps
 
 # _unzipGoDeps unzips the go dependencies zip file
-_unzipGoDeps:
+_unzipGoDeps: $(GOLANG_DEPS_ARTIFACT)
 	unzip -qo -d . $(GOLANG_DEPS_ARTIFACT)
 .PHONY: _unzipGoDeps
 
@@ -65,7 +65,7 @@ _zipBinArtifact:
 .PHONY: _zipBinArtifact
 
 # _unzipBinArtifact unzips the artifact that contains the binary packages
-_unzipBinArtifact:
+_unzipBinArtifact: $(BIN_ARTIFACT)
 	unzip -qo -d . $(BIN_ARTIFACT)
 .PHONY: _unzipBinArtifact
 
